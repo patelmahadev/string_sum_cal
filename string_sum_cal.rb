@@ -22,7 +22,7 @@ puts StringSumCal.add("6\n4,8") # => 18
 puts StringSumCal.add("5,6,7,8,9")
 puts StringSumCal.add("//;\n2;8") # => 10
 # puts StringSumCal.add("5,-7") # unlock the line to see error
-
+# puts StringSumCal.add("5,-7,-9,-8") # unlock the line to see error
 #  test Cases
 class StringSumCalTest < Minitest::Test
     # Test for adding with an empty string value.
@@ -33,7 +33,7 @@ class StringSumCalTest < Minitest::Test
     def test_addition_with_one_number
         assert_equal 2, StringSumCal.add("2")
     end
-    # Test for adding with a Two number values
+    # Test for adding with a Two number values.
     def test_addition_with_two_numbers
         assert_equal 15, StringSumCal.add("6,9")
     end
@@ -41,12 +41,21 @@ class StringSumCalTest < Minitest::Test
     def test_addition_with_new_lines_between_numbers
         assert_equal 14, StringSumCal.add("2\n3,9")
     end
-    # Test for adding with multiple numbers
+    # Test for adding with multiple numbers.
     def test_addition_with_multiple_numbers
         assert_equal 30, StringSumCal.add("4,5,6,7,8")
     end
-    # Test for adding with delimiter
+    # Test for adding with delimiter values.
     def test_addition_with_delimiters
         assert_equal 14, StringSumCal.add("//;\n6;8")
+    end
+    # Test for adding with negetive numbers values.
+    def test_addition_with_negative_number_raises_exception
+        assert_raises(RuntimeError) { StringSumCal.add("5,-9") }
+    end
+    # Test for adding with multiple negetive numbers values.
+    def test_addition_with_multiple_negative_numbers_raises_exception_and_shows_message
+        exception = assert_raises(RuntimeError) { StringSumCal.add("5,-7,-8") }
+        assert_match /negative values not allowed: -7, -8/, exception.message
     end
 end
