@@ -11,6 +11,7 @@ puts StringSumCal.add("") # => 0
 puts StringSumCal.add("2") # => 2
 puts StringSumCal.add("3,5") # => 8
 puts StringSumCal.add("6\n4,8") # => 18
+puts StringSumCal.add("5,6,7,8,9")
 #  test Cases
 class StringSumCalTest < Minitest::Test
   # Test for adding with an empty string value.
@@ -26,8 +27,11 @@ class StringSumCalTest < Minitest::Test
     assert_equal 15, StringSumCal.add("6,9")
   end
   # Test for adding with new lines between numbers.
-  def test_add_with_new_lines_between_numbers
+  def test_addition_with_new_lines_between_numbers
     assert_equal 14, StringSumCal.add("2\n3,9")
   end
-
+  # Test for adding with multiple numbers
+  def test_addition_with_multiple_numbers
+    assert_equal 30, StringSumCal.add("4,5,6,7,8")
+  end
 end
