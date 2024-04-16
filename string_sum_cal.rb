@@ -9,7 +9,9 @@ class StringSumCal
         else
             values = values.split(/,|\n/)
         end
-        values.map(&:to_i).sum
+        negatives = values.select { |n| n.to_i < 0 }
+        raise "negative values not allowed: #{negatives.join(", ")}" if negatives.any?
+        values.sum(&:to_i)
     end
 end
 # 
@@ -19,6 +21,7 @@ puts StringSumCal.add("3,5") # => 8
 puts StringSumCal.add("6\n4,8") # => 18
 puts StringSumCal.add("5,6,7,8,9")
 puts StringSumCal.add("//;\n2;8") # => 10
+# puts StringSumCal.add("5,-7") # unlock the line to see error
 
 #  test Cases
 class StringSumCalTest < Minitest::Test
